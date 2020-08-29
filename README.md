@@ -4,8 +4,8 @@ ATM GUI with mysql database coded with tkinter python
 This allows the user the register and login to access the ATM where the user can deposit,withdraw and check his balance
 A database will be created of every user and will be stored in the Mysql
 
-
-
+## Register/login screen
+![Register/login screen](/images/register_login_screen.png)
 
 
 
