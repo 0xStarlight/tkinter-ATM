@@ -33,6 +33,10 @@ A database will be created of every user and will be stored in the Mysql
 ## Build with
 * Python
 
+
+## Author
+* Bhaskar Pal - *Initial Work* - [bhaskarpal](https://github.com/bhaskarpal) 
+
 ## License
 * This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
 
