@@ -1,9 +1,10 @@
 # tkinter-ATM
-ATM GUI with mysql database coded with tkinter python
-
 [![HitCount](http://hits.dwyl.com/{bhaskarpal}/{tkinter-ATM}.svg)](http://hits.dwyl.com/{bhaskarpal}/{tkinter-ATM})
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/bhaskarpal)
 ![Build status](https://ci.appveyor.com/api/projects/status/pjxh5g91jpbh7t84?svg=true)
+
+ATM GUI with mysql database coded with tkinter python
+
 
 
 This allows the user the register and login to access the ATM where the user can deposit,withdraw and check his balance
