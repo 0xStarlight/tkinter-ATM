@@ -10,6 +10,7 @@ A database will be created of every user and will be stored in the Mysql
 ## ATM Snapshots
 ![ATM Screen](ATM_screen.png)
 ![ATM Screen](main_screen.png)
+![ATM Screen](withdraw_screen.png)
 
 ## Requirements
 
