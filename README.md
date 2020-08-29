@@ -1,5 +1,5 @@
 [![HitCount](http://hits.dwyl.com/onyx-storm/tkinter-ATM.svg)](http://hits.dwyl.com/onyx-storm/tkinter-ATM)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/bhaskarpal)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/onyx-storm)
 ![Build status](https://ci.appveyor.com/api/projects/status/pjxh5g91jpbh7t84?svg=true)
 
 # tkinter-ATM
