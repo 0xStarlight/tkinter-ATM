@@ -30,7 +30,7 @@ A database will be created of every user and will be stored in the Mysql
 * Python
 
 ## License
-* This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+* This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
 
 ## Acknowledgments
 * Base code created by the help of [CodeFoxx](https://www.youtube.com/channel/UCvi0rWTSkJkrunfhXH0tYuA) Youtuber
