@@ -21,7 +21,7 @@ A database will be created of every user and will be stored in the Mysql
 
 * Download all the images folder and the python file in the same folder and run the program
 
-## mysql database
+## Mysql Database
 
 * Database : payrealx
 * Table    : payrealbank
