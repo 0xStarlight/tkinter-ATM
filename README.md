@@ -9,17 +9,17 @@ A database will be created of every user and will be stored in the Mysql
 
 
 
-Requirements:
+## Requirements:
 
-Python 2.X or 3.X
-Pillow should be insatlled in your system (pip install Pillow)
+* Python 2.X or 3.X
+* Pillow should be insatlled in your system (pip install Pillow)
 
-How to run the program:
+## How to run the program:
 
-Download all the images and the python file in the same folder and run the program
+* Download all the images and the python file in the same folder and run the program
 
 
 
-Note:
+## Note:
 
-for the program to run successfully open the code and change `enter your mysql password` to the password of your mysql system password
+* for the program to run successfully open the code and change `enter your mysql password` to the password of your mysql system password
