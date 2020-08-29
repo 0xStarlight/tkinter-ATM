@@ -22,4 +22,4 @@ Download all the images and the python file in the same folder and run the progr
 
 Note:
 
-for the program to run successfully open the code and change '<enter your mysql password>' to the password of your mysql system password
+for the program to run successfully open the code and change `enter your mysql password` to the password of your mysql system password
