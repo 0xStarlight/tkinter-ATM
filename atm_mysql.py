@@ -1,4 +1,5 @@
-################################# IMPORTED MODULES #################################
+
+################## IMPORTED MODULES #################################
 from tkinter import *
 from tkinter import messagebox
 import  tkinter.messagebox
@@ -9,9 +10,9 @@ from PIL import Image,ImageTk
 import time
 import random
 import mysql.connector
-################################# BANKING SCREEN USING CLASS #################################
+############################################################ BANKING SCREEN USING CLASS ############################################################
 
-################################# CURRENT BALANCE #################################
+################## CURRENT BALANCE #################################
 
 
 current_balance=0.00
@@ -29,8 +30,8 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=1)
 
         self.frames = {}
-        ################## INITIALIZING PAGES IN CONTAINER ##################
-        for F in (StartPage, MenuPage, WithdrawPage,DepositPage,BalancePage):
+        ################## INITIALIZING PAGES IN CONTAINER #################################
+        for F in (StartPage, MenuPage, WithdrawPage,DepositPage,BalancePage,InfoPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -42,7 +43,7 @@ class SampleApp(tk.Tk):
         frame = self.frames[page_name]
         frame.tkraise()
 
-########################## START PAGE ##########################
+################## START PAGE #################################
 class StartPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -81,6 +82,20 @@ class StartPage(tk.Frame):
         dualtone_label=tk.Label(self, text='',font=('orbitron',13),fg='white',bg='#33334d',anchor='n')
         dualtone_label.pack(fill='both',expand='True')
 
+        def changescreen():
+            self.controller.destroy()
+            main_screen()
+
+        def popup2():
+            response=messagebox.askyesno('Exit','Do you want to use another account?')
+
+            if response == 1:
+                return changescreen()
+            else:
+                return
+
+        register_login_screen = tk.Button(dualtone_label,text='Use another account',font=('orbitron',12),command=popup2,relief='raised',borderwidth=3,width=23,height=3).pack(pady=10,padx=10,side='bottom',anchor='e')
+
         ################## BOTTOM FRAME #################################
         bottom_frame=tk.Frame(self,relief='raised',borderwidth=3).pack(fill='x',side='bottom')
 
@@ -113,7 +128,7 @@ class StartPage(tk.Frame):
 
 
 
-########################## MENU PAGE ##########################
+################## MENU PAGE #################################
 class MenuPage(tk.Frame):
 
     def __init__(self, parent, controller):
@@ -147,6 +162,12 @@ class MenuPage(tk.Frame):
         balance_button=tk.Button(button_frame,text='Balance',font=('orbitron',13),command=balance,relief='raised',borderwidth=3,width=30,height=4)
         balance_button.grid(row=0,column=1,pady=7,padx=794)
 
+        def info():
+            controller.show_frame('InfoPage')
+
+        info_button=tk.Button(button_frame,text='Personal Info',font=('orbitron',13),command=info,relief='raised',borderwidth=3,width=30,height=4)
+        info_button.grid(row=2,column=0,pady=5)
+
         def exit():
             controller.show_frame('StartPage')
 
@@ -154,13 +175,13 @@ class MenuPage(tk.Frame):
         exit_button=tk.Button(button_frame,text='Exit',font=('orbitron',13),command=exit,relief='raised',borderwidth=3,width=30,height=4)
         exit_button.grid(row=1,column=1,pady=5)
 
-########################## WITHDRAW PAGE ##########################
+################## WITHDRAW PAGE #################################
 class WithdrawPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#3d3d5c')
         self.controller = controller
-        #self.controller.title('Withdraw Amount')
+
         heading=tk.Label(self,text='PayRealX ATM',font=('orbitron',45,'bold'),foreground='white',background='#3d3d5c')
         heading.pack(pady=25)
         choose_amount_label=tk.Label(self,text='Choose the amount you want to withdraw',font=('orbitron',13),fg='white',bg='#3d3d5c')
@@ -179,7 +200,7 @@ class WithdrawPage(tk.Frame):
                 messagebox.showinfo('TRANSACTION','Done Successfully!')
                 other_amount_entry.delete(0,END)
                 controller.shared_data['Balance'].set(current_balance)
-                mydb=mysql.connector.connect(host="localhost",user="root",password="enter your mysql password")
+                mydb=mysql.connector.connect(host="localhost",user="root",password=enter your mysql password)
                 mycursor=mydb.cursor()
                 mycursor.execute("use payrealx")
                 mycursor.execute(f"update payrealbank set balance ={current_balance} where accid = {username1} ")
@@ -189,25 +210,25 @@ class WithdrawPage(tk.Frame):
 
 
 
-        twenty_button=tk.Button(button_frame,text='20$',font=('orbitron',12),command=lambda:withdraw(20),relief='raised',borderwidth=3,width=30,height=4)
+        twenty_button=tk.Button(button_frame,text='$20',font=('orbitron',12),command=lambda:withdraw(20),relief='raised',borderwidth=3,width=30,height=4)
         twenty_button.grid(row=0,column=0,pady=5)
 
-        fourty_button=tk.Button(button_frame,text='40$',font=('orbitron',12),command=lambda:withdraw(40),relief='raised',borderwidth=3,width=30,height=4)
+        fourty_button=tk.Button(button_frame,text='$40',font=('orbitron',12),command=lambda:withdraw(40),relief='raised',borderwidth=3,width=30,height=4)
         fourty_button.grid(row=1,column=0,pady=5)
 
-        sixty_button=tk.Button(button_frame,text='60$',font=('orbitron',12),command=lambda:withdraw(60),relief='raised',borderwidth=3,width=30,height=4)
+        sixty_button=tk.Button(button_frame,text='$60',font=('orbitron',12),command=lambda:withdraw(60),relief='raised',borderwidth=3,width=30,height=4)
         sixty_button.grid(row=2,column=0,pady=5)
 
-        eighty_button=tk.Button(button_frame,text='80$',font=('orbitron',12),command=lambda:withdraw(80),relief='raised',borderwidth=3,width=30,height=4)
+        eighty_button=tk.Button(button_frame,text='$80',font=('orbitron',12),command=lambda:withdraw(80),relief='raised',borderwidth=3,width=30,height=4)
         eighty_button.grid(row=3,column=0,pady=5)
 
-        one_hundred_button=tk.Button(button_frame,text='100$',font=('orbitron',12),command=lambda:withdraw(100),relief='raised',borderwidth=3,width=30,height=4)
+        one_hundred_button=tk.Button(button_frame,text='$100',font=('orbitron',12),command=lambda:withdraw(100),relief='raised',borderwidth=3,width=30,height=4)
         one_hundred_button.grid(row=0,column=1,pady=5,padx=794)
 
-        two_hundred_button=tk.Button(button_frame,text='200$',font=('orbitron',12),command=lambda:withdraw(200),relief='raised',borderwidth=3,width=30,height=4)
+        two_hundred_button=tk.Button(button_frame,text='$200',font=('orbitron',12),command=lambda:withdraw(200),relief='raised',borderwidth=3,width=30,height=4)
         two_hundred_button.grid(row=1,column=1,pady=5)
 
-        three_hundred_button=tk.Button(button_frame,text='300$',font=('orbitron',12),command=lambda:withdraw(300),relief='raised',borderwidth=3,width=30,height=4)
+        three_hundred_button=tk.Button(button_frame,text='$300',font=('orbitron',12),command=lambda:withdraw(300),relief='raised',borderwidth=3,width=30,height=4)
         three_hundred_button.grid(row=2,column=1,pady=5)
 
         cash=tk.StringVar()
@@ -235,7 +256,7 @@ class WithdrawPage(tk.Frame):
                     cash.set('')
                     messagebox.showinfo('TRANSACTION','Done Successfully!')
                     controller.show_frame('MenuPage')
-                    mydb=mysql.connector.connect(host="localhost",user="root",password="enter your mysql password")
+                    mydb=mysql.connector.connect(host="localhost",user="root",password=enter your mysql password)
                     mycursor=mydb.cursor()
                     mycursor.execute("use payrealx")
                     mycursor.execute(f"update payrealbank set balance ={current_balance} where accid = {username1} ")
@@ -246,13 +267,13 @@ class WithdrawPage(tk.Frame):
 
         other_amount_entry.bind('<Return>',other_amount)
 
-########################## DEPOSIT PAGE ##########################
+################## DEPOSIT PAGE #################################
 class DepositPage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#3d3d5c')
         self.controller = controller
-        #self.controller.title('Deposit Amount')
+
         heading=tk.Label(self,text='PayRealX ATM',font=('orbitron',45,'bold'),foreground='white',background='#3d3d5c')
         heading.pack(pady=25)
 
@@ -277,7 +298,7 @@ class DepositPage(tk.Frame):
                     controller.shared_data['Balance'].set(current_balance)
                     controller.show_frame('MenuPage')
                     cash.set('')
-                    mydb=mysql.connector.connect(host="localhost",user="root",password="enter your mysql password")
+                    mydb=mysql.connector.connect(host="localhost",user="root",password=enter your mysql password)
                     mycursor=mydb.cursor()
                     mycursor.execute("use payrealx")
                     mycursor.execute(f"update payrealbank set balance ={current_balance} where accid = {username1} ")
@@ -294,13 +315,13 @@ class DepositPage(tk.Frame):
         two_tone_label=tk.Label(self,bg='#33334d')
         two_tone_label.pack(fill='both',expand=True)
 
-########################## BALANCE PAGE ##########################
+################## BALANCE PAGE #################################
 class BalancePage(tk.Frame):
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#3d3d5c')
         self.controller = controller
-        #self.controller.title('Balance Amount')
+
         heading=tk.Label(self,text='PayRealX ATM',font=('orbitron',45,'bold'),foreground='white',background='#3d3d5c')
         heading.pack(pady=25)
 
@@ -308,11 +329,17 @@ class BalancePage(tk.Frame):
         controller.shared_data['Balance'].trace('w', self.on_balance_changed)
         controller.shared_data['Balance'].set(current_balance)
 
-        balance_label = tk.Label(self, textvariable=self.balance_var, font=('orbitron',13),fg='white', bg='#3d3d5c', anchor='w')
+        balance_label = tk.Label(self, text='Balance', font=('orbitron',13),fg='white', bg='#3d3d5c', anchor='w')
         balance_label.pack()
 
+        upperframe=tk.Frame(self,bg='#33334d')
+        upperframe.pack(fill='both',expand='True')
+
+        balance_label = tk.Label(upperframe, textvariable=self.balance_var, font=('orbitron',16),fg='white', bg='#33334d', anchor='w')
+        balance_label.pack(pady=7)
+
         button_frame=tk.Label(self,bg='#33334d')
-        button_frame.pack(fill='both',expand=True)
+        button_frame.pack(fill='both')
 
         def menu():
             controller.show_frame('MenuPage')
@@ -329,33 +356,77 @@ class BalancePage(tk.Frame):
     def on_balance_changed(self, *args):
         self.balance_var.set('Current Balance: $'+str(self.controller.shared_data['Balance'].get()))
 
-########################## CLASS  DEFINE FUNCTION ##########################
+class InfoPage(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent,bg='#3d3d5c')
+        self.controller = controller
+
+        heading=tk.Label(self,text='PayRealX ATM',font=('orbitron',45,'bold'),foreground='white',background='#3d3d5c')
+        heading.pack(pady=25)
+        main_menu_label=tk.Label(self,text='Personal Info',font=('orbitron',13),fg='white',bg='#3d3d5c')
+        main_menu_label.pack(pady=5)
+
+        upperframe=tk.Frame(self,bg='#33334d')
+        upperframe.pack(fill='both',expand='True')
+
+        button_frame=tk.Frame(self,bg='#33334d')
+        button_frame.pack(fill='both')
+
+        mydb=mysql.connector.connect(host="localhost",user="root",password=enter your mysql password)
+        mycursor=mydb.cursor()
+        mycursor.execute("create database if not exists payrealx")
+        mycursor.execute("use payrealx")
+        mycursor.execute(f"select password from payrealbank where accid = {username1} ")
+        pass_code=mycursor.fetchone()
+        pass_code_read=''
+        for i in pass_code:
+            pass_code_read+=i
+
+        name_info = tk.Label(upperframe, text=f'Name : {user_display_name}', font=('orbitron',16),fg='white', bg='#33334d')
+        name_info.pack(pady=5)
+
+        accid_info = tk.Label(upperframe, text=f'Account No. : {username1}', font=('orbitron',16),fg='white', bg='#33334d')
+        accid_info.pack(pady=5)
+
+        pin_info = tk.Label(upperframe, text=f'Pin : {pass_code_read}', font=('orbitron',16),fg='white', bg='#33334d')
+        pin_info.pack(pady=5)
+
+        def exit():
+            controller.show_frame('MenuPage')
+
+        exit_button=tk.Button(button_frame,text='Menu',command=exit,font=('orbitron',13),relief='raised',borderwidth=3,width=23,height=4)
+        exit_button.pack(pady=20,padx=10)
+
+
+################## CLASS  DEFINE FUNCTION #################################
 def abcd():
 
         app = SampleApp()
         app.mainloop()
 
 
-########################## REGISTER/LOGIN ##########################
+############################################################ REGISTER/LOGIN ############################################################
 
 
 def password_not_recognised():
   messagebox.showwarning('WARNING',('Invalid Password!'))
 
-################## ABOUT SCREEN ##################
+################## ABOUT SCREEN #################################
 def about():
   global screen3
   screen3 = Toplevel(screen)
   screen3.title("About")
-  screen3.geometry("400x90+600+250")
+  screen3.geometry("380x90+750+230")
+  screen3.configure(bg='lightblue')
   screen3.iconphoto(False,tk.PhotoImage(file='abc.png'))
-  Label(screen3, text = "Created and Developed by Bhaskar Pal\n Tkinter python with Mysql database \n Database payrealx \n Table payrealbank",font = ("orbitron", 10,'bold')).pack()
+  Label(screen3,bg='lightblue', text = "Created and Developed by Bhaskar Pal\n 12 CS Project \n Tkinter python with Mysql database \n Database payrealx \n Table payrealbank",font = ("orbitron", 10,'bold')).pack()
 
-################## WARNING_SCREEN ##################
+################## WARNING_SCREEN #################################
 def user_not_found():
   messagebox.showwarning('WARNING',('No AccountID Found !'))
 
-################## REGISTER USER SCREEN ##################
+################## REGISTER USER SCREEN #################################
 def register_user():
   global username_info
   username_info = str(rand)
@@ -364,7 +435,7 @@ def register_user():
 
   ################## MYSQL DATABASE ##################
   global mycursor
-  mydb=mysql.connector.connect(host="localhost",user="root",password="enter your mysql password")
+  mydb=mysql.connector.connect(host="localhost",user="root",password=enter your mysql password)
   mycursor=mydb.cursor()
   mycursor.execute("create database if not exists payrealx")
   mycursor.execute("use payrealx")
@@ -379,7 +450,7 @@ def register_user():
       b.append(i[0])
   if username_info in b:
     messagebox.showwarning('WARNING',('AccountID already exists!'))
-    #username_entry.delete(0,END)
+
     password_entry.delete(0,END)
     name_entry.delete(0,END)
   elif name_info=='' :
@@ -397,7 +468,7 @@ def register_user():
         messagebox.showinfo('Registration',('Done Successfully!'))
 
 
-################## LOGIN VERIFY SCREEN ##################
+################## LOGIN VERIFY SCREEN #################################
 def login_verify():
   global current_balance
   global username1
@@ -408,7 +479,7 @@ def login_verify():
   username_entry1.delete(0, END)
   password_entry1.delete(0, END)
 
-  mydb=mysql.connector.connect(host="localhost",user="root",password="enter your mysql password")
+  mydb=mysql.connector.connect(host="localhost",user="root",password=enter your mysql password)
   mycursor=mydb.cursor()
   #mycursor.execute("create database if not exists payrealx")
   mycursor.execute("use payrealx")
@@ -457,7 +528,7 @@ def login_verify():
                     user_name.append(i[0])
                   user_display_name=str(user_name[0])
                   #login_sucess()
-                  mydb=mysql.connector.connect(host="localhost",user="root",password="enter your mysql password")
+                  mydb=mysql.connector.connect(host="localhost",user="root",password=enter your mysql password)
                   mycursor=mydb.cursor()
                   #mycursor.execute("create database if not exists payrealx")
                   mycursor.execute("use payrealx")
@@ -483,7 +554,7 @@ def login_verify():
   else:
         user_not_found()
 
-################## REGISTER DISPLAY SCREEN ##################
+################## REGISTER DISPLAY SCREEN #################################
 def register():
   global screen1
   global password_entry
@@ -491,8 +562,14 @@ def register():
   global rand
   screen1 = Toplevel(screen)
   screen1.title("Register")
-  screen1.geometry("300x250+600+250")
+  screen1.geometry("380x470+750+230")
+  screen1.configure(bg='lightblue')
   screen1.iconphoto(False,tk.PhotoImage(file='abc.png'))
+
+  photo = PhotoImage(file="login_person.png")
+  label = Label(screen1,image=photo,bg='lightblue')
+  label.image = photo
+  label.pack(pady=5)
 
   global username
   global password
@@ -506,36 +583,48 @@ def register():
   password = StringVar()
   name     = StringVar()
 
-  Label(screen1, text = "Please enter details below",font = ("orbitron", 10)).pack()
+  Label(screen1, text = "Please enter details below to register",bg='lightblue',font = ("orbitron", 10)).pack()
 
-  Label(screen1, text = "").pack()
-  Label(screen1, text = "Name",font = ("orbitron", 10)).pack()
+  Label(screen1, text = "",bg='lightblue').pack()
+  Label(screen1, text = "Name",font = ("orbitron", 10),bg='lightblue').pack()
   name_entry = Entry(screen1,font = ("orbitron",10), textvariable = name)
   name_entry.pack()
 
-  Label(screen1, text = "Account ID",font = ("orbitron", 10)).pack()
+  Label(screen1, text = "Account No.",font = ("orbitron", 10),bg='lightblue').pack()
   rand=random.randint(1,100000)
-  username=Label(screen1, text = rand,font = ("orbitron", 11)).pack()
+  username=Label(screen1, text = rand,font = ("orbitron", 11),bg='lightblue').pack()
   #username_entry = Entry(screen1, textvariable = username)
   #username_entry.pack()
 
-  Label(screen1, text = "Pin",font = ("orbitron", 10)).pack()
+  Label(screen1, text = "Pin",font = ("orbitron", 10),bg='lightblue').pack()
   password_entry =  Entry(screen1,font = ("orbitron",10), textvariable = password)
   password_entry.config(fg='black',show='●')
   password_entry.pack()
 
-  Label(screen1, text = "").pack()
-  Button(screen1, text = "Register",font = ("orbitron", 10), width = 10, height = 1, command = register_user).pack()
+  Label(screen1, text = "",bg='lightblue').pack()
 
-################## LOGIN DISPLAY SCREEN ##################
+  img1 = PhotoImage(file="register_final.png")
+  photoimage1 = img1.subsample(3, 3)
+  img1Btn = Button(screen1,command = register_user,image=photoimage1,bg='lightblue',activebackground='lightblue',relief=FLAT)
+  img1Btn.image = photoimage1
+  img1Btn.pack()
+
+################## LOGIN DISPLAY SCREEN #################################
 def login():
   global screen2
   screen2 = Toplevel(screen)
   screen2.title("Login")
-  screen2.geometry("300x250+600+250")
+  screen2.geometry("380x470+750+230")
+  screen2.configure(bg='lightblue')
   screen2.iconphoto(False,tk.PhotoImage(file='abc.png'))
-  Label(screen2, text = "Please enter details below to login",font = ("orbitron", 10)).pack()
-  Label(screen2, text = "").pack()
+
+  photo = PhotoImage(file="login_person.png")
+  label = Label(screen2,image=photo,bg='lightblue')
+  label.image = photo
+  label.pack(pady=5)
+
+  Label(screen2, text = "Please enter details below to login",bg='lightblue',font = ("orbitron", 10)).pack()
+  Label(screen2, text = "",bg='lightblue').pack()
 
   global username_verify
   global password_verify
@@ -547,32 +636,55 @@ def login():
   global username_entry1
   global password_entry1
 
-  Label(screen2, text = "Account ID",font = ("orbitron", 10)).pack()
+  Label(screen2, text = "Account No.",bg='lightblue',font = ("orbitron", 10)).pack()
   username_entry1 = Entry(screen2,font = ("orbitron",10) ,textvariable = username_verify)
   username_entry1.pack()
-  Label(screen2, text = "").pack()
-  Label(screen2, text = "Pin",font = ("orbitron", 10)).pack()
+
+  Label(screen2, text = "",bg='lightblue').pack()
+  Label(screen2, text = "Pin",bg='lightblue',font = ("orbitron", 10)).pack()
   password_entry1 = Entry(screen2,font = ("orbitron",10), textvariable = password_verify)
   password_entry1.config(fg='black',show='●')
   password_entry1.pack()
-  Label(screen2, text = "").pack()
-  Button(screen2, text = "Login",font = ("orbitron", 10), width = 10, height = 1, command = login_verify).pack()
+  Label(screen2, text = "",bg='lightblue').pack()
+
+  img1 = PhotoImage(file="login_final.png")
+  photoimage1 = img1.subsample(3, 3)
+  img1Btn = Button(screen2,command = login_verify,image=photoimage1,bg='lightblue',activebackground='lightblue',relief=FLAT)
+  img1Btn.image = photoimage1
+  img1Btn.pack()
 
 ################## REGISTER/LOGIN SCREEN #################################
 def main_screen():
   global screen
   screen = Tk()
-  screen.geometry("300x250+550+200")
+  screen.geometry("530x530+450+120")
   screen.title("PayRealX")
+  screen.configure(bg='lightblue')
   screen.iconphoto(False,tk.PhotoImage(file='abc.png'))
-  #screen.bind('<Return>')
-  Label(text = "PayRealX", bg = "grey", width = "300", height = "2", font = ("orbitron", 13,'bold')).pack()
-  Label(text = "").pack()
-  Button(text = "Login", font = ("orbitron", 10),height = "2", width = "30", command = login).pack()
-  Label(text = "").pack()
-  Button(text = "Register", font = ("orbitron", 10),height = "2", width = "30", command = register).pack()
-  Label(text = "").pack()
-  Button(text = "About", font = ("orbitron", 10),height = "2", width = "30", command = about).pack()
+
+
+  Label(text = "PayRealX",fg='white', bg = "grey", width = "300", height = "2", font = ("orbitron", 15,'bold')).pack()
+  Label(text = "",bg='lightblue').pack()
+
+  img = ImageTk.PhotoImage(Image.open("pr_logo.png"))
+  panel = Label(screen, image = img,bg='lightblue')
+  panel.pack()
+
+  photo1 = PhotoImage(file="login_final.png")
+  photoimage1 = photo1.subsample(2, 2)
+  Button(command = login,bg='lightblue',activebackground='lightblue',relief=FLAT,image = photoimage1).pack(pady=5)
+
+  Label(text = "",bg='lightblue',).pack()
+
+  photo2 = PhotoImage(file="register_final.png")
+  photoimage2 = photo2.subsample(2, 2)
+  Button(command = register,bg='lightblue',activebackground='lightblue',relief=FLAT,image = photoimage2).pack(pady=5)
+
+  Label(text = "",bg='lightblue').pack()
+
+  photo3 = PhotoImage(file="about_final.png")
+  photoimage3 = photo3.subsample(2, 2)
+  Button(command = about,bg='lightblue',activebackground='lightblue',relief=FLAT,image = photoimage3).pack(pady=5)
 
   screen.mainloop()
 
