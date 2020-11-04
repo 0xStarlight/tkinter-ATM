@@ -15,7 +15,7 @@ A database will be created of every user and will be stored in the Mysql
 ![Register/login screen](register_login_screen.png)
 
 ## ATM Snapshots
-![ATM Screen](ATM_screen.png)
+![ATM Screen](ATM_display.png)
 ![ATM Screen](withdraw_screen.png)
 
 ## Requirements
