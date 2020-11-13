@@ -12,7 +12,7 @@ This allows the user the register and login to access the ATM where the user can
 A database will be created of every user and will be stored in the Mysql
 
 ## Register/login screen
-
+![Register/login screen](login_register_screen.png)
 ![Register/login screen](login_screen.png)
 ![Register/login screen](register_screen.png)
 
