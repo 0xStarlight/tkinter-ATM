@@ -30,7 +30,7 @@ A database will be created of every user and will be stored in the Mysql
 
 ## How to run the program
 
-* Download all the images folder and the python file in the same folder and run the program
+* Place the python file in the image folder and run the program
 
 ## Mysql Database
 
