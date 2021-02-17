@@ -24,7 +24,7 @@ A database will be created of every user and will be stored in the Mysql
 
 ## Requirements
 
-* Python 2.X or 3.X
+* Python 3.X
 * Pillow should be insatlled on your system (pip install Pillow)
 * Mysql should be installed on your system
 
