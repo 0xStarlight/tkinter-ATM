@@ -54,4 +54,3 @@ The data of every user and will be stored in the Mysql database
 ## Acknowledgments
 * Base code created by the help of [CodeFoxx](https://www.youtube.com/channel/UCvi0rWTSkJkrunfhXH0tYuA) Youtuber
 
-Dont forget to cortribute before downloading the files
